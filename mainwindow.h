@@ -32,6 +32,7 @@ class paintWidget : public QWidget
     Q_OBJECT;
 
 public:
+    friend class MainWindow;
     paintWidget(QMainWindow* parent = 0);
     Node map[xlen+10][ylen+10]; // game map
     bool gamestart;
@@ -45,15 +46,19 @@ private:
     QList<Node*> food;
 
     int dx, dy;
-    int foodCount, moveSpeed;
+    int moveSpeed;
     int level;
     int bonus;
+    int score;
+    int roadLen;
 
     Node* head;
     Node* tail;
 
 signals:
     void restared();
+    void paused();
+    void moved();
 
 public slots:
     void startGameSlot();
@@ -61,9 +66,8 @@ public slots:
     void restartGameSlot();
     void pauseGameSlot();
     void snakeMoveSlot();
-//    void quitGameSlot();
-//    void saveGameSlot();
-//    void loadGameSlot();
+    void saveGameSlot();
+    void loadGameSlot();
 
 public:
     void gameOver();
@@ -76,6 +80,7 @@ public:
     void createFood();
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent* event);
+    bool notinSnake(int x, int y);
 };
 
 class MainWindow : public QMainWindow
@@ -86,6 +91,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     paintWidget* gamewidget;
+    void keyPressEvent(QKeyEvent *event);
+    QTimer* time;
+    QString viewText;
 
 private:
     Ui::MainWindow *ui;
@@ -98,7 +106,8 @@ public slots:
     void continueGameSlot();
     void restartGameSlot();
     void pauseGameSlot();
-//    void quitGameSlot();
+    void quitGameSlot();
+    void snakeMoveSlot();
 //    void saveGameSlot();
 //    void loadGameSlot();
 };

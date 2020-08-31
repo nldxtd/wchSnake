@@ -29,3 +29,24 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    image/continue.jpg \
+    image/load.jpg \
+    image/pause.jpg \
+    image/quit.jpg \
+    image/restart.jpg \
+    image/save.jpg \
+    image/start.jpg \
+    image/continue.ico \
+    image/load.ico \
+    image/pause.ico \
+    image/quit.ico \
+    image/restart.ico \
+    image/save.ico \
+    image/start.ico \
+    image/logo.ico \
+    image/logo.ico
+
+RESOURCES += \
+    image.qrc
